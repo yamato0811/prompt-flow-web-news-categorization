@@ -1,20 +1,23 @@
-# Web Classification
+# Web News Categorization
 
 This is a flow demonstrating multi-class classification with LLM. Given an url, it will classify the url into one web category with just a few shots, simple summarization and classification prompts.
 
 ## Tools used in this flow
+
 - LLM Tool
 - Python Tool
 
 ## What you will learn
 
 In this flow, you will learn
+
 - how to compose a classification flow with LLM.
 - how to feed few shots to LLM classifier.
 
 ## Prerequisites
 
 Install promptflow sdk and other dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
@@ -37,6 +40,7 @@ pf connection create --file ../../../connections/openai.yml --set api_key=<your_
 ```
 
 ### 2. Configure the flow with your connection
+
 `flow.dag.yaml` is already configured with connection named `open_ai_connection`.
 
 ### 3. Test flow with single line data
@@ -75,6 +79,7 @@ pf run show-details --name $run_name
 ### 5. Run with classification evaluation flow
 
 create `evaluation` run:
+
 ```bash
 # (Optional) save previous run name into variable, and create a new random run name for further use
 prev_run_name=$run_name
@@ -91,8 +96,8 @@ pf run show-metrics --name $run_name
 pf run visualize --name $run_name
 ```
 
-
 ### 6. Submit run to cloud
+
 ```bash
 # set default workspace
 az account set -s <your_subscription_id>
