@@ -6,13 +6,13 @@ inputs:
     type: string
     description: Please specify the groundtruth column, which contains the true
       label to the outputs that your flow produces.
-    default: APP
+    default: 国際
   prediction:
     type: string
     description:
       Please specify the prediction column, which contains the predicted
       outputs that your flow produces.
-    default: APP
+    default: 国際
 outputs:
   grade:
     type: string
