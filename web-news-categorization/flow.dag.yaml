@@ -4,14 +4,14 @@ environment:
 inputs:
   url:
     type: string
-    default: https://play.google.com/store/apps/details?id=com.twitter.android
+    default: https://news.yahoo.co.jp/articles/aeca3d1c0292c92b3573261ff373417f9413a978
 outputs:
   category:
     type: string
     reference: ${convert_to_dict.output.category}
-  evidence:
+  reason:
     type: string
-    reference: ${convert_to_dict.output.evidence}
+    reference: ${convert_to_dict.output.reason}
 nodes:
   - name: fetch_text_content_from_url
     type: python
@@ -20,8 +20,20 @@ nodes:
       path: fetch_text_content_from_url.py
     inputs:
       url: ${inputs.url}
+    aggregation: false
   - name: summarize_text_content
-    use_variants: true
+    type: llm
+    source:
+      type: code
+      path: summarize_text_content.jinja2
+    inputs:
+      deployment_name: gpt-35-turbo
+      model: gpt-3.5-turbo
+      max_tokens: 128
+      temperature: 0.2
+      text: ${fetch_text_content_from_url.output}
+    connection: to_replace_with_connection_name
+    api: chat
   - name: prepare_examples
     type: python
     source:
@@ -38,7 +50,6 @@ nodes:
       model: gpt-3.5-turbo
       max_tokens: 128
       temperature: 0.2
-      url: ${inputs.url}
       text_content: ${summarize_text_content.output}
       examples: ${prepare_examples.output}
     connection: to_replace_with_connection_name
@@ -51,35 +62,3 @@ nodes:
     inputs:
       input_str: ${classify_with_llm.output}
     aggregation: false
-node_variants:
-  summarize_text_content:
-    default_variant_id: variant_0
-    variants:
-      variant_0:
-        node:
-          type: llm
-          source:
-            type: code
-            path: summarize_text_content.jinja2
-          inputs:
-            deployment_name: gpt-35-turbo
-            model: gpt-3.5-turbo
-            max_tokens: 128
-            temperature: 0.2
-            text: ${fetch_text_content_from_url.output}
-          connection: to_replace_with_connection_name
-          api: chat
-      variant_1:
-        node:
-          type: llm
-          source:
-            type: code
-            path: summarize_text_content__variant_1.jinja2
-          inputs:
-            deployment_name: gpt-35-turbo
-            model: gpt-3.5-turbo
-            max_tokens: 256
-            temperature: 0.3
-            text: ${fetch_text_content_from_url.output}
-          connection: to_replace_with_connection_name
-          api: chat

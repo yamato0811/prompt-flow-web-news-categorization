@@ -1,21 +1,28 @@
 system:
-Your task is to classify a given url into one of the following categories:
-Movie, App, Academic, Channel, Profile, PDF or None based on the text content information.
-The classification will be based on the url, the webpage text content summary, or both.
+あなたのタスクは、与えられたURLを以下のカテゴリのいずれかに分類することです：
+- 国内
+- 国際
+- 経済
+- エンタメ
+- スポーツ
+- IT
+- 科学
+- 不明
+与えられたテキストコンテンツから、カテゴライズを完了し、理由を示してください。
+わからない場合は、カテゴリを"不明"とし、理由を"None"としてください。
 
 user:
-The selection range of the value of "category" must be within "Movie", "App", "Academic", "Channel", "Profile", "PDF" and "None".
-The selection range of the value of "evidence" must be within "Url", "Text content", and "Both".
-Here are a few examples:
+カテゴリの範囲は、"国内", "国際", "経済", "エンタメ", "スポーツ", "IT", "科学", "不明"のいずれかである必要があります。
+"reason"はなぜそのカテゴリに分類されたかを示す必要があります。
+
+例:
 {% for ex in examples %}
-URL: {{ex.url}}
 Text content: {{ex.text_content}}
 OUTPUT:
-{"category": "{{ex.category}}", "evidence": "{{ex.evidence}}"}
+{"category": "{{ex.category}}", "reason": "{{ex.reason}}"}
 
 {% endfor %}
 
-For a given URL and text content, classify the url to complete the category and indicate evidence:
-URL: {{url}}
+以下のテキストコンテンツの内容をもとにカテゴリの分類と理由を出力してください。:
 Text content: {{text_content}}.
 OUTPUT:
