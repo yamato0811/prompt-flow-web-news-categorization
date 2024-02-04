@@ -1,0 +1,7 @@
+2024-01-27 14:35:44 +0900   45822 execution.flow     INFO     Start executing nodes in thread pool mode.
+2024-01-27 14:35:44 +0900   45822 execution.flow     INFO     Start to run 1 nodes with concurrency level 16.
+2024-01-27 14:35:44 +0900   45822 execution.flow     INFO     Executing node grade. node run id: 0c5c9a07-4385-410c-93bc-51bca39f2556_grade_0
+2024-01-27 14:35:44 +0900   45822 execution.flow     INFO     Node grade completes.
+2024-01-27 14:35:44 +0900   45822 execution.flow     INFO     Start to run 1 nodes with concurrency level 16.
+2024-01-27 14:35:44 +0900   45822 execution.flow     INFO     Executing node calculate_accuracy. node run id: b4e964ef-845a-4de1-82b2-92075d07c50e_calculate_accuracy_reduce
+2024-01-27 14:35:44 +0900   45822 execution.flow     INFO     Node calculate_accuracy completes.
